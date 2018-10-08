@@ -3507,13 +3507,17 @@ type ProductSubscriptionPreviewInvoice {
     # The amount due for this invoice, in USD cents. If price is negative (i.e., this invoice will
     # cause a credit), then the amount due is 0.
     amountDue: Int!
-    # The date when the billing period for the invoice ends. This is also the end of the validity
-    # period for the subscriptions in the invoice.
-    periodEndDate: String!
     # For updates to existing subscriptions, the effective date for which this preview invoice was
     # calculated, expressed as the number of seconds since the epoch. For new subscriptions, this is
     # null.
     prorationDate: String
+    # The "before" state of the product subscription (i.e., the existing subscription), prior to the update that this preview
+    # represents, or null if the preview is for a new subscription.
+    beforeInvoiceItem: ProductSubscriptionInvoiceItem
+    # The "after" state of the product subscription, with the update applied to the subscription.
+    # For new subscriptions, this is just the invoice item for the subscription that will be
+    # created.
+    afterInvoiceItem: ProductSubscriptionInvoiceItem!
 }
 
 # An input type that describes a product license to be generated and signed.

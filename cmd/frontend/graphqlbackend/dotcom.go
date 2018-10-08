@@ -65,7 +65,7 @@ type ProductSubscription interface {
 // ProductSubscriptionInvoiceItem is the interface for the GraphQL type
 // ProductSubscriptionInvoiceItem.
 type ProductSubscriptionInvoiceItem interface {
-	Plan() (ProductPlan, error)
+	Plan(context.Context) (ProductPlan, error)
 	UserCount() int32
 	ExpiresAt() string
 }
@@ -190,8 +190,9 @@ type ProductLicenseConnection interface {
 type ProductSubscriptionPreviewInvoice interface {
 	Price() int32
 	AmountDue() int32
-	PeriodEndDate() string
 	ProrationDate() *string
+	BeforeInvoiceItem() ProductSubscriptionInvoiceItem
+	AfterInvoiceItem() ProductSubscriptionInvoiceItem
 }
 
 // ProductPlan is the interface for the GraphQL type ProductPlan.
